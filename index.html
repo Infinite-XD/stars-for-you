@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hot spots</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="panorama"></div>
+<script>
+pannellum.viewer('panorama', {
+    "type": "equirectangular",
+    "panorama": "/images/eso0932a.jpg",
+    "autoLoad": true,
+    // "hotSpotDebug": true,
+    "hotSpots": [
+        {
+            "pitch": -57.640315598256684,
+            "yaw": -68.47065313342274,
+            "cssClass": "custom-hotspot",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "hello there"
+        },
+        {
+            "pitch": -30.74,
+            "yaw": 82.35,
+            "cssClass": "custom-hotspot",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "haha another one"
+        },
+        {
+            "pitch": -15.22,
+            "yaw": -13.48,
+            "cssClass": "custom-hotspot",
+            "createTooltipFunc": hotspot,
+            "createTooltipArgs": "test"
+        }
+    ]
+});
+
+// Hot spot creation function
+function hotspot(hotSpotDiv, args) {
+    hotSpotDiv.classList.add('custom-tooltip');
+    var span = document.createElement('span');
+    span.innerHTML = args;
+    hotSpotDiv.appendChild(span);
+    span.style.width = span.scrollWidth - 20 + 'px';
+    span.style.marginLeft = -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + 'px';
+    span.style.marginTop = -span.scrollHeight - 12 + 'px';
+}
+</script>
+
+</body>
+</html>

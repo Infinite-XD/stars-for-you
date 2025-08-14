@@ -3,15 +3,15 @@
 # 🌟 Starry Night Project — Development Checklist
 
 ## Phase 1: Basic HTML Structure
-- [ ] Create a new `.html` file.
-- [ ] Add `<html>`, `<head>`, `<title>`, and `<body>` tags.
-- [ ] Put a heading (`<h1>`) on the page.
-- [ ] Open it in your browser.
+- [x] Create a new `.html` file.
+- [x] Add `<html>`, `<head>`, `<title>`, and `<body>` tags.
+- [x] Put a heading (`<h1>`) on the page.
+- [x] Open it in your browser.
 
 ## Phase 2: CSS Basics
-- [ ] Create a `.css` file and link it to your HTML.
-- [ ] Change the background color to **black**.
-- [ ] Set the font color to **white**.
+- [x] Create a `.css` file and link it to your HTML.
+- [x] Change the background color to **black**.
+- [x] Set the font color to **white**.
 
 ## Phase 3: Making a Star
 - [ ] Create a small `<div>` and give it a class (e.g., `.star`).
