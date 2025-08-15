@@ -1,177 +1,233 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stars for you</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"
+    ></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="panorama">
+      <div id="controls">
+        <div class="ctrl"><i class="fa-solid fa-circle-info"></i></div>
+        <div class="info-backdrop"></div>
+        <div class="info-box">
+            
+          <!-- Disclaimer -->
+          <div class="info-disclaimer">
+            <strong>Disclaimer:</strong> Reloading will reset your progress.
+          </div>
 
-<div id="panorama">
-    <div id="controls">
-    <div class="ctrl"><i class="fa-solid fa-circle-info"></i></div>
-    <div class="info-backdrop"></div>
-    <div class="info-box">
-    <button class="close-btn">&times;</button>
-    <h2>Info</h2>
-    <p>This is a very nice box</p>
+          <button class="close-btn" aria-label="Close">&times;</button>
+
+          <!-- Guide -->
+          <section class="info-section">
+            <h2>Guide</h2>
+            <p class="info-text">
+              A poem drifts within the Milky Way’s heart, while the distant stars silent witnesses to your greatness — yours is the quest to bring them into the light.
+            </p>
+          </section>
+
+          <!-- Progress -->
+          <section class="info-section">
+            <h2>Progress</h2>
+            <p>
+              Poem Stars — <span id="poem-stars-count">0/7</span>
+            <button class="progress-chip">
+            <svg class="chip-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
+            </svg>
+            View
+            </button>
+            </p>
+            <p>
+              Outlier Stars — <span id="outlier-stars-count">0/20</span>
+            <button class="progress-chip">
+            <svg class="chip-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
+            </svg>
+            View
+            </button>
+            </p>
+          </section>
+        </div>
+      </div>
     </div>
-    </div>
-</div>
 
+    <script>
+      pannellum.viewer("panorama", {
+        type: "equirectangular",
+        panorama: "images/eso0932a-2.jpg",
+        autoLoad: true,
+        preview: "images/download.jpg",
+        showControls: false,
+        // "hotSpotDebug": true,
+        hotSpots: [
+          {
+            pitch: -58.290315598256684,
+            yaw: -68.8065313342274,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "hello there",
+          },
+          {
+            pitch: -31.4,
+            yaw: 82,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "haha another one",
+          },
+          {
+            pitch: -16.4,
+            yaw: -13.4,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "test",
+          },
+          {
+            pitch: -42.5,
+            yaw: 59.7,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: 71.3,
+            yaw: 118,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: 17,
+            yaw: 54.2,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: -23.1,
+            yaw: -117.6,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: -9.1,
+            yaw: 135.7,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: -20.3,
+            yaw: 153.6,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: -24.33,
+            yaw: 101.24,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: 17.3,
+            yaw: 11,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: -25.21,
+            yaw: -163.64,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+          {
+            pitch: -5.5,
+            yaw: -131.5,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "meow",
+          },
+        ],
+      });
 
+      // Hot spot creation function
+      function hotspot(hotSpotDiv, args) {
+        hotSpotDiv.classList.add("custom-tooltip");
+        var span = document.createElement("span");
+        span.innerHTML = args;
+        hotSpotDiv.appendChild(span);
+        span.style.width = span.scrollWidth - 20 + "px";
+        span.style.marginLeft =
+          -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
+        span.style.marginTop = -span.scrollHeight - 12 + "px";
+      }
 
-<script>
-pannellum.viewer('panorama', {
-    "type": "equirectangular",
-    "panorama": "images/eso0932a.jpg",
-    "autoLoad": true,
-    "showControls": false,
-    // "hotSpotDebug": true,
-    "hotSpots": [
-        {
-            "pitch": -58.290315598256684,
-            "yaw": -68.8065313342274,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "hello there"
-        },
-        {
-            "pitch": -31.4,
-            "yaw": 82,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "haha another one"
-        },
-        {
-            "pitch": -16.4,
-            "yaw": -13.4,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "test"
-        },
-        {
-            "pitch": -42.5,
-            "yaw": 59.7,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": 71.3,
-            "yaw": 118,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": 17,
-            "yaw": 54.2,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": -23.1,
-            "yaw": -117.6,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": -9.1,
-            "yaw": 135.7,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": -20.3,
-            "yaw": 153.6,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": -24.33,
-            "yaw": 101.24,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": 17.3,
-            "yaw": 11,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": -25.21,
-            "yaw": -163.64,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-        {
-            "pitch": -5.5,
-            "yaw": -131.5,
-            "cssClass": "custom-hotspot",
-            "createTooltipFunc": hotspot,
-            "createTooltipArgs": "meow"
-        },
-    ]
-});
+      // info box
+      const infoBtn = document.querySelector(".ctrl");
+      const infoBox = document.querySelector(".info-box");
+      const backdrop = document.querySelector(".info-backdrop");
+      const closeBtn = document.querySelector(".close-btn");
 
-// Hot spot creation function
-function hotspot(hotSpotDiv, args) {
-    hotSpotDiv.classList.add('custom-tooltip');
-    var span = document.createElement('span');
-    span.innerHTML = args;
-    hotSpotDiv.appendChild(span);
-    span.style.width = span.scrollWidth - 20 + 'px';
-    span.style.marginLeft = -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + 'px';
-    span.style.marginTop = -span.scrollHeight - 12 + 'px';
-}
+      infoBtn.addEventListener("click", () => {
+        infoBox.classList.add("is-open");
+        backdrop.classList.add("is-open");
+      });
 
-// info box
-const infoBtn = document.querySelector('.ctrl');
-const infoBox = document.querySelector(".info-box");
-const backdrop = document.querySelector(".info-backdrop");
-const closeBtn = document.querySelector(".close-btn");
+      window.onload = (event) => {
+        infoBox.classList.add("is-open");
+        backdrop.classList.add("is-open");
+      };
 
-infoBtn.addEventListener("click", () => {
-  infoBox.classList.add("is-open");
-  backdrop.classList.add("is-open");
-});
+      closeBtn.addEventListener("click", () => {
+        infoBox.classList.remove("is-open");
+        backdrop.classList.remove("is-open");
+      });
 
-closeBtn.addEventListener("click", () => {
-  infoBox.classList.remove("is-open");
-  backdrop.classList.remove("is-open");
-});
+      backdrop.addEventListener("click", () => {
+        infoBox.classList.remove("is-open");
+        backdrop.classList.remove("is-open");
+      });
 
-backdrop.addEventListener("click", () => {
-  infoBox.classList.remove("is-open");
-  backdrop.classList.remove("is-open");
-});
+      // starter box
 
-// figure this out, closing pop up when clicking outside window
+      // const start = document.createElement('div')
+      // const
+      // const main = document.querySelector('#panorama')
 
-// window.addEventListener('click', ({ target }) => {
-//   const backdrop = target.closest('.info-backdrop');
-//   const clickedOnClosedPopup = popup && !popup.classList.contains('is-open');
-  
-//   popups.forEach(p => p.classList.remove('show'));
-  
-//   if (clickedOnClosedPopup) popup.classList.add('show');  
-// });
+      // start.classList.add('is-open')
+      // main.appendChild
 
+      // figure this out later, closing pop up when clicking outside window
 
-</script>
+      // window.addEventListener('click', ({ target }) => {
+      //   const backdrop = target.closest('.info-backdrop');
+      //   const clickedOnClosedPopup = popup && !popup.classList.contains('is-open');
 
-</body>
+      //   popups.forEach(p => p.classList.remove('show'));
+
+      //   if (clickedOnClosedPopup) popup.classList.add('show');
+      // });
+    </script>
+  </body>
 </html>
