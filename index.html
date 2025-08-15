@@ -7,16 +7,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-<div id="panorama"></div>
+<div id="panorama">
+    <div id="controls">
+    <div class="ctrl"><i class="fa-solid fa-circle-info"></i></div>
+    <div class="info-backdrop"></div>
+    <div class="info-box">
+    <button class="close-btn">&times;</button>
+    <h2>Info</h2>
+    <p>This is a very nice box</p>
+    </div>
+    </div>
+</div>
+
+
+
 <script>
 pannellum.viewer('panorama', {
     "type": "equirectangular",
     "panorama": "/images/eso0932a.jpg",
     "autoLoad": true,
-    "hotSpotDebug": true,
+    "showControls": false,
+    // "hotSpotDebug": true,
     "hotSpots": [
         {
             "pitch": -58.290315598256684,
@@ -122,6 +137,40 @@ function hotspot(hotSpotDiv, args) {
     span.style.marginLeft = -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + 'px';
     span.style.marginTop = -span.scrollHeight - 12 + 'px';
 }
+
+// info box
+const infoBtn = document.querySelector('.ctrl');
+const infoBox = document.querySelector(".info-box");
+const backdrop = document.querySelector(".info-backdrop");
+const closeBtn = document.querySelector(".close-btn");
+
+infoBtn.addEventListener("click", () => {
+  infoBox.classList.add("is-open");
+  backdrop.classList.add("is-open");
+});
+
+closeBtn.addEventListener("click", () => {
+  infoBox.classList.remove("is-open");
+  backdrop.classList.remove("is-open");
+});
+
+backdrop.addEventListener("click", () => {
+  infoBox.classList.remove("is-open");
+  backdrop.classList.remove("is-open");
+});
+
+// figure this out, closing pop up when clicking outside window
+
+// window.addEventListener('click', ({ target }) => {
+//   const backdrop = target.closest('.info-backdrop');
+//   const clickedOnClosedPopup = popup && !popup.classList.contains('is-open');
+  
+//   popups.forEach(p => p.classList.remove('show'));
+  
+//   if (clickedOnClosedPopup) popup.classList.add('show');  
+// });
+
+
 </script>
 
 </body>
