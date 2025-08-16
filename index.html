@@ -70,13 +70,13 @@
     </div>
 
     <script>
-      pannellum.viewer("panorama", {
+      viewer = pannellum.viewer("panorama", {
         type: "equirectangular",
         panorama: "images/eso0932a-2.jpg",
         autoLoad: true,
         preview: "images/download.jpg",
         showControls: false,
-        // "hotSpotDebug": true,
+        "hotSpotDebug": true,
         hotSpots: [
           {
             pitch: -58.290315598256684,
@@ -169,10 +169,70 @@
             createTooltipFunc: hotspot,
             createTooltipArgs: "meow",
           },
+          {
+            pitch: 2.4,
+            yaw: -13.8,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "My Star",
+            scaleFactor: -2
+          },
+          {
+            pitch: 0.7,
+            yaw: -2.85,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "My radiant beam...",
+            scaleFactor: -2
+          },
+          {
+            pitch: 4.69,
+            yaw: -6.8,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "Through storms...",
+            scale: false
+          },
+          {
+            pitch: 1.24,
+            yaw: 6.58,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "The void drags...",
+            scale: false
+          },
+          {
+            pitch: 0.87,
+            yaw: -11.9,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "This light, I won’t let dim...",
+            scale: false
+          },
+          {
+            pitch: 5.9,
+            yaw: 2.4,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "This light made me strong...",
+            scale: false
+          },
+          {
+            pitch: -0.05,
+            yaw: 11.4,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "So,",
+            scale: false
+          },
         ],
       });
 
-      // Hot spot creation function
+      function poemFound(hotspot) {
+          
+      }
+
+      // Hot spot creation function (outlier)
       function hotspot(hotSpotDiv, args) {
         hotSpotDiv.classList.add("custom-tooltip");
         var span = document.createElement("span");
@@ -181,7 +241,23 @@
         span.style.width = span.scrollWidth - 20 + "px";
         span.style.marginLeft =
           -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
-        span.style.marginTop = -span.scrollHeight - 12 + "px";
+        span.style.marginTop = -span.scrollHeight + "px";
+      }
+
+      // Poem Hot Spots (inliers)
+      function poemHotspot(hotSpotDiv, args) {
+        hotSpotDiv.classList.add("custom-tooltip");
+        hotSpotDiv.classList.add("poem-hotspot");
+        
+        var span = document.createElement("span");
+        span.innerHTML = args;
+        hotSpotDiv.appendChild(span);
+        span.style.width = span.scrollWidth - 20 + "px";
+        span.style.marginLeft =
+          -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
+        span.style.marginTop = -span.scrollHeight - 4 + "px";
+
+        hotSpotDiv.addEventListener("click", () => console.log(args))
       }
 
       // info box
@@ -210,25 +286,30 @@
         backdrop.classList.remove("is-open");
       });
 
-      // starter box
+      // scaling (THIS WAS A F'IN FAILURE)
+      // viewer.on('zoomchange', function(e) {
+      //   document.querySelectorAll('.custom-hotspot').forEach(el => {
+      //     // 50, 120
 
-      // const start = document.createElement('div')
-      // const
-      // const main = document.querySelector('#panorama')
-
-      // start.classList.add('is-open')
-      // main.appendChild
-
-      // figure this out later, closing pop up when clicking outside window
-
-      // window.addEventListener('click', ({ target }) => {
-      //   const backdrop = target.closest('.info-backdrop');
-      //   const clickedOnClosedPopup = popup && !popup.classList.contains('is-open');
-
-      //   popups.forEach(p => p.classList.remove('show'));
-
-      //   if (clickedOnClosedPopup) popup.classList.add('show');
+      //   });
       // });
+      // function hotspotResize(hotspots) {
+      //   console.log('meow')
+      //   hotspots.forEach(hotspot => {
+      //     console.log(hotspot.style.width)
+      //   });
+      // } 
+
+
+      // // document.addEventListener('wheel', hotspotResize(hotspots))
+      // viewer.on('load', function() {
+      //   const hotspots = document.querySelectorAll('.custom-hotspot');
+      //   console.log(hotspots); // should now contain your hotspot div(s)
+      //   document.addEventListener('wheel', hotspotResize(hotspots))
+      // });
+
+
+
     </script>
   </body>
 </html>
