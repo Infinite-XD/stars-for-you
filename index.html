@@ -202,7 +202,7 @@
             yaw: -13.8,
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
-            createTooltipArgs: "My-",
+            createTooltipArgs: "My radiant beam...",
             scaleFactor: -2,
           },
           {
@@ -210,7 +210,7 @@
             yaw: -2.85,
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
-            createTooltipArgs: "My radiant beam...",
+            createTooltipArgs: "This light made me strong...",
             scaleFactor: -2,
           },
           {
@@ -226,7 +226,7 @@
             yaw: 6.58,
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
-            createTooltipArgs: "The void drags...",
+            createTooltipArgs: "Even when...",
             scale: false,
           },
           {
@@ -234,7 +234,7 @@
             yaw: -11.9,
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
-            createTooltipArgs: "This light, I won’t let dim...",
+            createTooltipArgs: "The void drags...",
             scale: false,
           },
           {
@@ -242,7 +242,7 @@
             yaw: 2.4,
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
-            createTooltipArgs: "This light made me strong...",
+            createTooltipArgs: "So,",
             scale: false,
           },
           {
@@ -250,40 +250,57 @@
             yaw: 11.4,
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
-            createTooltipArgs: "So,",
+            createTooltipArgs: "For as long...",
+            scale: false,
+          },
+          {
+            pitch: 1.7,
+            yaw: -3.8,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: poemHotspot,
+            createTooltipArgs: "This light, I won’t let dim...",
             scale: false,
           },
         ],
       });
 
       const poem = {
-        "My radiant beam...": `My radiant beam in the night
-    Shining brighter than galaxies awake,
-    More beautiful than the moon in her full glory,
-    The most beautiful`,
+            "My radiant beam...": `My radiant beam in the night
+        Shining brighter than galaxies awake,
+        More beautiful than the moon in her full glory,
+        The most beautiful`,
 
-        "The void drags...": `The void drags you in,
-    Tugs at you,
-    Tries to twist that radiance—
-    But no, you’re brighter, you’re stronger.`,
+            "The void drags...": `The void drags you in,
+        Tugs at you,
+        Tries to twist that radiance—
+        But no, you’re brighter, you’re stronger.`,
 
-        "Through storms...": `Through storms of dust and time’s slow pull,
-    You burned unbroken,
-    And I learned to walk by your light
-    Even when my own sky had no dawn.`,
+            "Through storms...": `Through storms of dust and time’s slow pull,
+        You burned unbroken,
+        And I learned to walk by your light
+        Even when my own sky had no dawn.`,
 
-        "This light made me strong...": `This light made me strong,
-    Pulled me from my endless night,
-    Taught me that shadows fear persistence.`,
+            "This light made me strong...": `This light made me strong,
+        Pulled me from my endless night,
+        Taught me that shadows fear persistence.`,
 
-        "This light, I won’t let dim...": `This light, I won’t let dim.
-    The darkness, I’ll shoulder.
-    The void, I’ll fill.`,
+            "This light, I won’t let dim...": `This light, I won’t let dim.
+        The darkness, I’ll shoulder.
+        The void, I’ll fill.`,
 
-        "So,": `So, my star—
-    keep shining.`,
+            "So,": `So, my star—
+        keep shining.`,
 
-        "My-": 'Star'
+            "Even when...": `Even when distance swallows the sky,
+        Even when silence crowds my breath,
+        I’ll look upward,
+        And find you waiting.`,
+
+            "For as long...": `For as long as you burn,
+        Hope will have a name.
+        And I will whisper it—
+        My star.`
+
       };
 
       // Hot spot creation function (outlier)
@@ -292,10 +309,12 @@
         var span = document.createElement("span");
         span.innerHTML = args;
         hotSpotDiv.appendChild(span);
-        span.style.width = span.scrollWidth - 20 + "px";
-        span.style.marginLeft =
-          -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
-        span.style.marginTop = -span.scrollHeight + "px";
+        requestAnimationFrame(() => {
+          span.style.width = span.scrollWidth - 20 + "px";
+          span.style.marginLeft =
+            -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
+          span.style.marginTop = -span.scrollHeight - 10 + "px";
+        });
       }
 
       // Poem Hot Spots (inliers)
@@ -306,10 +325,12 @@
         var span = document.createElement("span");
         span.innerHTML = args;
         hotSpotDiv.appendChild(span);
-        span.style.width = span.scrollWidth - 20 + "px";
-        span.style.marginLeft =
-          -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
-        span.style.marginTop = -span.scrollHeight - 4 + "px";
+        requestAnimationFrame(() => {
+          span.style.width = span.scrollWidth - 20 + "px";
+          span.style.marginLeft =
+            -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
+          span.style.marginTop = -span.scrollHeight - 10 + "px";
+        });
 
         hotSpotDiv.addEventListener("click", (hotspot) => {
           const poemCard = document.querySelector(".poem-card");
