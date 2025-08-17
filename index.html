@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stars for you</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon_io/star2.ico">
+    <link rel="icon" type="image/x-icon" href="/images/favicon_io/star2.ico" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
@@ -24,8 +24,10 @@
       <div id="controls">
         <div class="ctrl"><i class="fa-solid fa-circle-info"></i></div>
         <div class="info-backdrop"></div>
+        <div class="poem-page">
+          <button class="close-poem-page" aria-label="Close">×</button>
+        </div>
         <div class="info-box">
-            
           <!-- Disclaimer -->
           <div class="info-disclaimer">
             <strong>Disclaimer:</strong> Reloading will reset your progress.
@@ -37,7 +39,9 @@
           <section class="info-section">
             <h2>Guide</h2>
             <p class="info-text">
-              A poem drifts within the Milky Way’s heart, while the distant stars silent witnesses to your greatness — yours is the quest to bring them into the light.
+              A poem drifts within the Milky Way’s heart, while the distant
+              stars silent witnesses to your greatness — yours is the quest to
+              bring them into the light.
             </p>
           </section>
 
@@ -46,25 +50,49 @@
             <h2>Progress</h2>
             <p>
               Poem Stars — <span id="poem-stars-count">0/7</span>
-            <button class="progress-chip">
-            <svg class="chip-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
-            </svg>
-            View
-            </button>
+              <button class="progress-chip">
+                <svg
+                  class="chip-icon"
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
+                </svg>
+                View
+              </button>
             </p>
             <p>
               Outlier Stars — <span id="outlier-stars-count">0/20</span>
-            <button class="progress-chip">
-            <svg class="chip-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"></circle>
-                <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
-            </svg>
-            View
-            </button>
+              <button class="progress-chip">
+                <svg
+                  class="chip-icon"
+                  viewBox="0 0 24 24"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
+                </svg>
+                View
+              </button>
             </p>
           </section>
+        </div>
+        <div class="poem-card">
+          <button class="close-poem" aria-label="Close">×</button>
+          <p class="poem"></p>
         </div>
       </div>
     </div>
@@ -76,7 +104,7 @@
         autoLoad: true,
         preview: "images/download.jpg",
         showControls: false,
-        "hotSpotDebug": true,
+        hotSpotDebug: true,
         hotSpots: [
           {
             pitch: -58.290315598256684,
@@ -174,8 +202,8 @@
             yaw: -13.8,
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
-            createTooltipArgs: "My Star",
-            scaleFactor: -2
+            createTooltipArgs: "My-",
+            scaleFactor: -2,
           },
           {
             pitch: 0.7,
@@ -183,7 +211,7 @@
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
             createTooltipArgs: "My radiant beam...",
-            scaleFactor: -2
+            scaleFactor: -2,
           },
           {
             pitch: 4.69,
@@ -191,7 +219,7 @@
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
             createTooltipArgs: "Through storms...",
-            scale: false
+            scale: false,
           },
           {
             pitch: 1.24,
@@ -199,7 +227,7 @@
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
             createTooltipArgs: "The void drags...",
-            scale: false
+            scale: false,
           },
           {
             pitch: 0.87,
@@ -207,7 +235,7 @@
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
             createTooltipArgs: "This light, I won’t let dim...",
-            scale: false
+            scale: false,
           },
           {
             pitch: 5.9,
@@ -215,7 +243,7 @@
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
             createTooltipArgs: "This light made me strong...",
-            scale: false
+            scale: false,
           },
           {
             pitch: -0.05,
@@ -223,14 +251,40 @@
             cssClass: "custom-hotspot",
             createTooltipFunc: poemHotspot,
             createTooltipArgs: "So,",
-            scale: false
+            scale: false,
           },
         ],
       });
 
-      function poemFound(hotspot) {
-          
-      }
+      const poem = {
+        "My radiant beam...": `My radiant beam in the night
+    Shining brighter than galaxies awake,
+    More beautiful than the moon in her full glory,
+    The most beautiful`,
+
+        "The void drags...": `The void drags you in,
+    Tugs at you,
+    Tries to twist that radiance—
+    But no, you’re brighter, you’re stronger.`,
+
+        "Through storms...": `Through storms of dust and time’s slow pull,
+    You burned unbroken,
+    And I learned to walk by your light
+    Even when my own sky had no dawn.`,
+
+        "This light made me strong...": `This light made me strong,
+    Pulled me from my endless night,
+    Taught me that shadows fear persistence.`,
+
+        "This light, I won’t let dim...": `This light, I won’t let dim.
+    The darkness, I’ll shoulder.
+    The void, I’ll fill.`,
+
+        "So,": `So, my star—
+    keep shining.`,
+
+        "My-": 'Star'
+      };
 
       // Hot spot creation function (outlier)
       function hotspot(hotSpotDiv, args) {
@@ -248,7 +302,7 @@
       function poemHotspot(hotSpotDiv, args) {
         hotSpotDiv.classList.add("custom-tooltip");
         hotSpotDiv.classList.add("poem-hotspot");
-        
+
         var span = document.createElement("span");
         span.innerHTML = args;
         hotSpotDiv.appendChild(span);
@@ -257,7 +311,22 @@
           -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
         span.style.marginTop = -span.scrollHeight - 4 + "px";
 
-        hotSpotDiv.addEventListener("click", () => console.log(args))
+        hotSpotDiv.addEventListener("click", (hotspot) => {
+          const poemCard = document.querySelector(".poem-card");
+          const closePoem = document.querySelector(".close-poem");
+          const poemText = document.querySelector(".poem-card p");
+          poemCard.classList.add("is-open");
+          backdrop.classList.add("is-open");
+
+          // close
+          closePoem.addEventListener("click", () => {
+            poemCard.classList.remove("is-open");
+            backdrop.classList.remove("is-open");
+          });
+
+          // show verse
+          poemText.textContent = poem[args];
+        });
       }
 
       // info box
@@ -265,6 +334,7 @@
       const infoBox = document.querySelector(".info-box");
       const backdrop = document.querySelector(".info-backdrop");
       const closeBtn = document.querySelector(".close-btn");
+      const poemPage = document.querySelector(".poem-page");
 
       infoBtn.addEventListener("click", () => {
         infoBox.classList.add("is-open");
@@ -274,6 +344,7 @@
       window.onload = (event) => {
         infoBox.classList.add("is-open");
         backdrop.classList.add("is-open");
+        // poemPage.classList.add("is-open");
       };
 
       closeBtn.addEventListener("click", () => {
@@ -298,18 +369,7 @@
       //   hotspots.forEach(hotspot => {
       //     console.log(hotspot.style.width)
       //   });
-      // } 
-
-
-      // // document.addEventListener('wheel', hotspotResize(hotspots))
-      // viewer.on('load', function() {
-      //   const hotspots = document.querySelectorAll('.custom-hotspot');
-      //   console.log(hotspots); // should now contain your hotspot div(s)
-      //   document.addEventListener('wheel', hotspotResize(hotspots))
-      // });
-
-
-
+      // }
     </script>
   </body>
 </html>

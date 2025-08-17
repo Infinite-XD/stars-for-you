@@ -277,3 +277,188 @@ div.custom-tooltip span::after {
 .info-text {
     padding-bottom: 15px;
 }
+
+/* Poem */
+
+/* ============ Poem Card (Glassmorphism Style) ============ */
+.poem-card {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.98);
+  z-index: 1001;
+
+  /* glassmorphism look */
+  background: rgba(28, 28, 28, 0.75);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  color: #fff;
+  width: min(90vw, 420px);
+  padding: clamp(22px, 3vw, 32px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.55);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+.poem-card::before,
+.poem-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(204, 199, 199, 0.25);
+}
+
+/* Left margin line */
+.poem-card::before {
+  left: 0;
+  transform: translateX(20px);
+}
+
+/* Right margin line */
+.poem-card::after {
+  right: 0;
+  transform: translateX(-50px);
+}
+
+.poem-card.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0s;
+}
+
+/* ============ Close Button (Minimal, lighter) ============ */
+.close-poem {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  color: #ccc;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-poem:hover {
+  color: #fff;
+  transform: scale(1.15);
+}
+
+
+/* ============ Full Page Poem (Glassmorphism Style, Modal Style) ============ */
+.poem-page {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.98);
+  z-index: 1000;
+
+  /* glass look */
+  background: rgba(28, 28, 28, 0.75);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  color: #fff;
+
+  padding: clamp(26px, 4vw, 44px);
+  width: min(92vw, 800px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.55);
+
+  /* hidden by default */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0s linear 220ms;
+}
+
+/* Open state */
+.poem-page.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    visibility 0s;
+}
+
+/* optional accent line */
+.poem-page::before,
+.poem-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(204, 199, 199, 0.25);
+}
+
+/* Left margin line */
+.poem-page::before {
+  left: 0;
+  transform: translateX(20px);
+}
+
+/* Right margin line */
+.poem-page::after {
+  right: 0;
+  transform: translateX(-50px);
+}
+
+.close-poem-page {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  color: #ccc;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-poem-page:hover {
+  color: #fff;
+  transform: scale(1.15);
+}
+
+.poem-card p {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    white-space: pre-line; /* preserves \n line breaks */
+}
