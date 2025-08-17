@@ -211,7 +211,21 @@ div.custom-tooltip span::after {
     font-size: 0.85rem;
     cursor: pointer;
     transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
-    margin-left: 10px;
+    margin-left: 4px;
+}
+
+.progress-chip.is-locked {
+    border-color: rgba(255, 0, 0, 0.3);
+    box-shadow: 0 0 3px rgba(255, 0, 0, 0.3); /* softer glow */
+    color: #ffcccc; /* gentle red tint on text */
+}
+
+.progress-chip.is-locked::after {
+    content: "View (Locked)";
+}
+
+.progress-chip.is-open::after {
+    content: "View";
 }
 
 .progress-chip:hover {
@@ -317,7 +331,7 @@ div.custom-tooltip span::after {
     visibility 0s linear 220ms;
 }
 
-.poem-card::before {
+/* .poem-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -326,11 +340,11 @@ div.custom-tooltip span::after {
   background: rgba(204, 199, 199, 0.25);
 }
 
-/* Left margin line */
+/* Left margin line
 .poem-card::before {
   left: 0;
   transform: translateX(20px);
-}
+} */
 
 
 .poem-card.is-open {
@@ -342,6 +356,13 @@ div.custom-tooltip span::after {
     opacity 220ms ease,
     transform 220ms ease,
     visibility 0s;
+}
+
+.poem-card p {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    white-space: pre-line; /* preserves \n line breaks */
 }
 
 /* ============ Close Button (Minimal, lighter) ============ */
@@ -374,78 +395,85 @@ div.custom-tooltip span::after {
   position: fixed;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) scale(0.98);
+  transform: translate(-50%, -50%) scale(0.94);
   z-index: 1000;
 
-  /* glass look */
-  background: rgba(28, 28, 28, 0.75);
-  backdrop-filter: blur(14px) saturate(150%);
-  -webkit-backdrop-filter: blur(14px) saturate(150%);
-  color: #fff;
+  background: rgba(20, 20, 20, 0.78);
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  color: #f8f8f8;
 
-  padding: clamp(26px, 4vw, 44px);
-  width: min(92vw, 800px);
-  border-radius: 14px;
+  padding: 16px 20px 16px 32px;
+  width: min(85vw, 420px);
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
 
-  /* hidden by default */
+  line-height: 1.5;
+  font-size: 0.85rem;
+
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 
   transition:
-    opacity 220ms ease,
-    transform 220ms ease,
-    visibility 0s linear 220ms;
+    opacity 180ms ease,
+    transform 180ms ease,
+    visibility 0s linear 180ms;
 }
 
-/* Open state */
 .poem-page.is-open {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
   transition:
-    opacity 220ms ease,
-    transform 220ms ease,
+    opacity 180ms ease,
+    transform 180ms ease,
     visibility 0s;
 }
 
-/* optional accent line */
-.poem-page::before,
-.poem-page::after {
+/* Title */
+.poem-page h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.7em;
+  font-weight: 600;
+}
+
+/* Stanzas */
+.poem-page p {
+  margin: 0 0 0.9em;
+  text-align: left;
+  font-size:small;
+}
+
+.poem-page p:last-of-type {
+  font-style: italic;
+  color: #ece4ff;
+}
+
+/* Optional slim accent line – adjusted */
+.poem-page::before {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 10px;
+  bottom: 10px;
+  left: 16px; /* 👈 closer to the edge so text stays centered */
   width: 1px;
-  background: rgba(204, 199, 199, 0.25);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-/* Left margin line */
-.poem-page::before {
-  left: 0;
-  transform: translateX(20px);
-}
-
-/* Right margin line */
-.poem-page::after {
-  right: 0;
-  transform: translateX(-50px);
-}
-
+/* Close button */
 .close-poem-page {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 28px;
-  height: 28px;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
   border: none;
   background: none;
-  color: #ccc;
-  font-size: 20px;
-  line-height: 1;
+  color: #aaa;
+  font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -455,12 +483,5 @@ div.custom-tooltip span::after {
 
 .close-poem-page:hover {
   color: #fff;
-  transform: scale(1.15);
-}
-
-.poem-card p {
-    padding: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    white-space: pre-line; /* preserves \n line breaks */
+  transform: scale(1.1);
 }

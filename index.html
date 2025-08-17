@@ -26,7 +26,53 @@
         <div class="info-backdrop"></div>
         <div class="poem-page">
           <button class="close-poem-page" aria-label="Close">×</button>
+          <h2>My Star</h2>
+          <p>
+            My radiant beam in the night<br />
+            Shining brighter than galaxies awake,<br />
+            More beautiful than the moon in her full glory,<br />
+            The most beautiful
+          </p>
+          <p>
+            The void drags you in,<br />
+            Tugs at you,<br />
+            Tries to twist that radiance—<br />
+            But no, you’re brighter, you’re stronger.
+          </p>
+          <p>
+            Through storms of dust and time’s slow pull,<br />
+            You burned unbroken,<br />
+            And I learned to walk by your light<br />
+            Even when my own sky had no dawn.
+          </p>
+          <p>
+            This light made me strong,<br />
+            Pulled me from my endless night,<br />
+            Taught me that shadows fear persistence.
+          </p>
+          <p>
+            This light, I won’t let dim.<br />
+            The darkness, I’ll shoulder.<br />
+            The void, I’ll fill.
+          </p>
+          <p>
+            So, my star—<br />
+            keep shining
+          </p>
+          <p>
+            Even when distance swallows the sky,<br />
+            Even when silence crowds my breath,<br />
+            I’ll look upward,<br />
+            And find you waiting.
+          </p>
+          <p>
+            For as long as you burn,<br />
+            Hope will have a name.<br />
+            And I will whisper it—<br />
+            My star.
+          </p>
         </div>
+
         <div class="info-box">
           <!-- Disclaimer -->
           <div class="info-disclaimer">
@@ -49,8 +95,8 @@
           <section class="info-section">
             <h2>Progress</h2>
             <p>
-              Poem Stars — <span id="poem-stars-count">0/7</span>
-              <button class="progress-chip">
+              Poem Stars — <span id="poem-stars-count">0/8</span>
+              <button class="progress-chip is-locked" id="inliers">
                 <svg
                   class="chip-icon"
                   viewBox="0 0 24 24"
@@ -65,12 +111,12 @@
                   <circle cx="12" cy="12" r="3"></circle>
                   <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"></path>
                 </svg>
-                View
+                
               </button>
             </p>
             <p>
               Outlier Stars — <span id="outlier-stars-count">0/20</span>
-              <button class="progress-chip">
+              <button class="progress-chip" id="outliers">
                 <svg
                   class="chip-icon"
                   viewBox="0 0 24 24"
@@ -104,7 +150,7 @@
         autoLoad: true,
         preview: "images/download.jpg",
         showControls: false,
-        hotSpotDebug: true,
+        // hotSpotDebug: true,
         hotSpots: [
           {
             pitch: -58.290315598256684,
@@ -265,43 +311,75 @@
       });
 
       const poem = {
-            "My radiant beam...": `My radiant beam in the night
+        "My radiant beam...": `My radiant beam in the night
         Shining brighter than galaxies awake,
         More beautiful than the moon in her full glory,
         The most beautiful`,
 
-            "The void drags...": `The void drags you in,
+        "The void drags...": `The void drags you in,
         Tugs at you,
         Tries to twist that radiance—
         But no, you’re brighter, you’re stronger.`,
 
-            "Through storms...": `Through storms of dust and time’s slow pull,
+        "Through storms...": `Through storms of dust and time’s slow pull,
         You burned unbroken,
         And I learned to walk by your light
         Even when my own sky had no dawn.`,
 
-            "This light made me strong...": `This light made me strong,
+        "This light made me strong...": `This light made me strong,
         Pulled me from my endless night,
         Taught me that shadows fear persistence.`,
 
-            "This light, I won’t let dim...": `This light, I won’t let dim.
+        "This light, I won’t let dim...": `This light, I won’t let dim.
         The darkness, I’ll shoulder.
         The void, I’ll fill.`,
 
-            "So,": `So, my star—
+        "So,": `So, my star—
         keep shining.`,
 
-            "Even when...": `Even when distance swallows the sky,
+        "Even when...": `Even when distance swallows the sky,
         Even when silence crowds my breath,
         I’ll look upward,
         And find you waiting.`,
 
-            "For as long...": `For as long as you burn,
+        "For as long...": `For as long as you burn,
         Hope will have a name.
         And I will whisper it—
-        My star.`
-
+        My star.`,
       };
+
+      // stars found tracking and recording
+
+      var foundVersesList = [];
+
+      function foundVerses(args) {
+        found = document.querySelector("#poem-stars-count");
+        if (!foundVersesList.includes(args)) {
+          foundVersesList.push(args);
+          found.textContent = foundVersesList.length + "/8";
+          canView(foundVersesList);
+        }
+        console.log(foundVersesList);
+      }
+
+      // opening poem page
+
+      function canView(foundVersesL) {
+        poemViewButton = document.querySelector("#inliers");
+        poemCloseButton = document.querySelector(".close-poem-page");
+        if (foundVersesL.length == 8) {
+          poemViewButton.classList.remove('is-locked');
+          poemViewButton.classList.add('is-open');
+          poemViewButton.addEventListener("click", () => {
+            poemPage.classList.add("is-open");
+            infoBox.classList.remove("is-open");
+            backdrop.classList.remove("is-open");
+          });
+          poemCloseButton.addEventListener("click", () => {
+            poemPage.classList.remove("is-open");
+          });
+        }
+      }
 
       // Hot spot creation function (outlier)
       function hotspot(hotSpotDiv, args) {
@@ -338,22 +416,21 @@
           const poemText = document.querySelector(".poem-card p");
           poemCard.classList.add("is-open");
           backdrop.classList.add("is-open");
-
           // close
           closePoem.addEventListener("click", () => {
             poemCard.classList.remove("is-open");
             backdrop.classList.remove("is-open");
           });
-
+          foundVerses(args);
           // show verse
           poemText.textContent = poem[args];
         });
       }
 
       // info box
-      const infoBtn = document.querySelector(".ctrl");
       const infoBox = document.querySelector(".info-box");
       const backdrop = document.querySelector(".info-backdrop");
+      const infoBtn = document.querySelector(".ctrl");
       const closeBtn = document.querySelector(".close-btn");
       const poemPage = document.querySelector(".poem-page");
 
@@ -365,7 +442,6 @@
       window.onload = (event) => {
         infoBox.classList.add("is-open");
         backdrop.classList.add("is-open");
-        // poemPage.classList.add("is-open");
       };
 
       closeBtn.addEventListener("click", () => {
