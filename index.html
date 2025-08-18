@@ -150,8 +150,22 @@
         autoLoad: true,
         preview: "images/download.jpg",
         showControls: false,
-        // hotSpotDebug: true,
+        hotSpotDebug: true,
         hotSpots: [
+          {
+            pitch: 19.2,
+            yaw: -64.8,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "ahhhhh",
+          },
+          {
+            pitch: -14.3,
+            yaw: 88.9,
+            cssClass: "custom-hotspot",
+            createTooltipFunc: hotspot,
+            createTooltipArgs: "ahhhhh",
+          },          
           {
             pitch: -58.290315598256684,
             yaw: -68.8065313342274,
@@ -348,9 +362,45 @@
         My star.`,
       };
 
+      // glow affect (idk why im torturing myself)
+
+function createParticle(x, y, angle, foundOutliers, args) {
+    if (!(foundOutliers.includes(args))) {
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
+    document.body.appendChild(particle);
+
+    particle.style.left = x + "px";
+    particle.style.top = y + "px";
+
+    const radius = 50; // fixed distance for balance
+    const dx = Math.cos(angle) * radius;
+    const dy = Math.sin(angle) * radius;
+
+    // Animate
+    particle.animate(
+      [
+        { transform: `translate(0, 0) scale(1)`, opacity: 1 },
+        { transform: `translate(${dx}px, ${dy}px) scale(0.2)`, opacity: 0 }
+      ],
+      {
+        duration: 400,
+        easing: "ease-out",
+        fill: "forwards"
+      }
+    );
+
+    setTimeout(() => particle.remove(), 1200);
+    }
+  }
+
+
+
       // stars found tracking and recording
 
       var foundVersesList = [];
+
+      var foundOutliersList = [];
 
       function foundVerses(args) {
         found = document.querySelector("#poem-stars-count");
@@ -363,7 +413,6 @@
       }
 
       // opening poem page
-
       function canView(foundVersesL) {
         poemViewButton = document.querySelector("#inliers");
         poemCloseButton = document.querySelector(".close-poem-page");
@@ -381,18 +430,38 @@
         }
       }
 
+
+
+
       // Hot spot creation function (outlier)
       function hotspot(hotSpotDiv, args) {
-        hotSpotDiv.classList.add("custom-tooltip");
-        var span = document.createElement("span");
-        span.innerHTML = args;
-        hotSpotDiv.appendChild(span);
+        hotSpotDiv.classList.add('big')
+        var div = document.createElement("div");
+        div.classList.add('outlier')
+        hotSpotDiv.appendChild(div);
         requestAnimationFrame(() => {
-          span.style.width = span.scrollWidth - 20 + "px";
-          span.style.marginLeft =
-            -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
-          span.style.marginTop = -span.scrollHeight - 10 + "px";
+          div.style.width = div.scrollWidth - 20 + "px";
+          div.style.marginLeft =
+            -(div.scrollWidth - hotSpotDiv.offsetWidth) / 2 + "px";
+          div.style.marginTop = -div.scrollHeight + 26 + "px";
         });
+        hotSpotDiv.addEventListener("click", (e) => {
+          const rect = hotSpotDiv.getBoundingClientRect();
+          const x = rect.left + rect.width / 4;
+          const y = rect.top + rect.height / 4;
+
+          const particleCount = 16; // evenly spaced
+          for (let i = 0; i < particleCount; i++) {
+            const angle = (i / particleCount) * (2 * Math.PI);
+            createParticle(x, y, angle, foundOutliersList, args);
+          }
+          div.classList.remove('outlier')
+          hotSpotDiv.classList.remove('custom-hotspot')
+
+          foundOutliersList.push(args);
+
+        });
+        
       }
 
       // Poem Hot Spots (inliers)

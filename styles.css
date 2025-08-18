@@ -34,6 +34,67 @@ body {
         0 0 120px rgba(255, 255, 255, 0.4);
 }
 
+/* Outlier styling */
+
+.big {
+    width: 0.8vw;
+    height: 0.8vw;
+}
+
+.outlier {
+  background: #fff8dc;
+  border-radius: 50%;
+  padding: 20px; 
+  background-clip: content-box; 
+}
+
+.outlier::before,
+.outlier::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  background: linear-gradient(to right, transparent, #fff8dc, transparent);
+  opacity: 0;
+  pointer-events: none; /* makes sure the pseudo-elements don’t block hover */
+}
+
+.outlier::before {
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+}
+
+.outlier::after {
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) rotate(90deg);
+}
+
+.outlier:hover {
+  transform: scale(1.2);
+}
+
+.outlier:hover::before,
+.outlier:hover::after {
+  width: 20px;
+  opacity: 0.7;
+}
+
+
+/* wheeeee flyyy */
+
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,230,1) 0%, rgba(255,255,200,0.6) 50%, transparent 100%);
+    pointer-events: none;
+    box-shadow: 0 0 6px rgba(255,255,220,0.8); /* soft glow */
+  }
 
 /* Tooltip */
 div.custom-tooltip span {
@@ -74,20 +135,6 @@ div.custom-tooltip:hover span {
   transition-delay: 0s;
   pointer-events: auto;
 }
-
-
-
-/* Tooltip Arrow
-div.custom-tooltip span::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 6px;
-    border-style: solid;
-    border-color: rgba(0,0,0,0.85) transparent transparent transparent;
-} */
 
 
 /* info controls */
