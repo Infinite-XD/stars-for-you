@@ -72,6 +72,25 @@
             My star.
           </p>
         </div>
+        <div class="outlier-page">
+          <button class="close-outlier-page" aria-label="Close">&times;</button>
+          <h2>This is you</h2>
+          <p>(yes its empty, find an outlying star first dummy)</p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+        </div>
 
         <div class="info-box">
           <!-- Disclaimer -->
@@ -115,8 +134,8 @@
               </button>
             </p>
             <p>
-              Outlier Stars — <span id="outlier-stars-count">0/20</span>
-              <button class="progress-chip" id="outliers">
+              Outlier Stars — <span id="outlier-stars-count">0/15</span>
+              <button class="progress-chip" id="outlierButton">
                 <svg
                   class="chip-icon"
                   viewBox="0 0 24 24"
@@ -150,112 +169,112 @@
         autoLoad: true,
         preview: "images/download.jpg",
         showControls: false,
-        hotSpotDebug: true,
+        // hotSpotDebug: true,
         hotSpots: [
           {
             pitch: 19.2,
             yaw: -64.8,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "ahhhhh",
+            createTooltipArgs: "1",
           },
           {
             pitch: -14.3,
             yaw: 88.9,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "ahhhhh",
+            createTooltipArgs: "2",
           },          
           {
             pitch: -58.290315598256684,
             yaw: -68.8065313342274,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "hello there",
+            createTooltipArgs: "3",
           },
           {
             pitch: -31.4,
             yaw: 82,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "haha another one",
+            createTooltipArgs: "4",
           },
           {
             pitch: -16.4,
             yaw: -13.4,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "test",
+            createTooltipArgs: "5",
           },
           {
             pitch: -42.5,
             yaw: 59.7,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "6",
           },
           {
             pitch: 71.3,
             yaw: 118,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "7",
           },
           {
             pitch: 17,
             yaw: 54.2,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "8",
           },
           {
             pitch: -23.1,
             yaw: -117.6,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "9",
           },
           {
             pitch: -9.1,
             yaw: 135.7,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "10",
           },
           {
             pitch: -20.3,
             yaw: 153.6,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "11",
           },
           {
             pitch: -24.33,
             yaw: 101.24,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "12",
           },
           {
             pitch: 17.3,
             yaw: 11,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "13",
           },
           {
             pitch: -25.21,
             yaw: -163.64,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "14",
           },
           {
             pitch: -5.5,
             yaw: -131.5,
             cssClass: "custom-hotspot",
             createTooltipFunc: hotspot,
-            createTooltipArgs: "meow",
+            createTooltipArgs: "15",
           },
           {
             pitch: 2.4,
@@ -323,6 +342,8 @@
           },
         ],
       });
+
+      const you = ['You’re stronger than you know.', 'You’re resilient, no matter what comes your way.', 'You carry a sweetness that makes the world lighter.', 'You’re kind in ways that never go unnoticed.', 'You put your whole heart into everything you do.', 'You’re smart, in ways that constantly amaze me.', 'You’re just, amazing. ', 'You’re effortlessly cute, even when you don’t try.', 'You’re weird- like me.', 'You’re caring.', 'You can be mean sometimes — but that’s cute too.', 'You’re a dummy.', 'You’re talented in more ways than you realise.', 'You’re the prettiest.', 'You’re my star.']
 
       const poem = {
         "My radiant beam...": `My radiant beam in the night
@@ -431,11 +452,9 @@ function createParticle(x, y, angle, foundOutliers, args) {
       }
 
 
-
-
       // Hot spot creation function (outlier)
       function hotspot(hotSpotDiv, args) {
-        hotSpotDiv.classList.add('big')
+        hotSpotDiv.classList.add('big');
         var div = document.createElement("div");
         div.classList.add('outlier')
         hotSpotDiv.appendChild(div);
@@ -459,7 +478,9 @@ function createParticle(x, y, angle, foundOutliers, args) {
           hotSpotDiv.classList.remove('custom-hotspot')
 
           foundOutliersList.push(args);
-
+          var uniqueArray = [...new Set(foundOutliersList)];
+          
+          ViewOutliers(uniqueArray)
         });
         
       }
@@ -523,19 +544,34 @@ function createParticle(x, y, angle, foundOutliers, args) {
         backdrop.classList.remove("is-open");
       });
 
-      // scaling (THIS WAS A F'IN FAILURE)
-      // viewer.on('zoomchange', function(e) {
-      //   document.querySelectorAll('.custom-hotspot').forEach(el => {
-      //     // 50, 120
 
-      //   });
-      // });
-      // function hotspotResize(hotspots) {
-      //   console.log('meow')
-      //   hotspots.forEach(hotspot => {
-      //     console.log(hotspot.style.width)
-      //   });
-      // }
+      // outlier viewing
+
+      const outlierViewButton = document.querySelector('#outlierButton');
+      const outlierPage = document.querySelector('.outlier-page');
+      const closeBtnOutlier = document.querySelector('.close-outlier-page');
+      const outliersFound = document.querySelector('#outlier-stars-count')
+      const outlierPageParas = document.querySelectorAll('.outlier-page p')
+
+      outlierViewButton.addEventListener('click', ()=> {
+        outlierPage.classList.add("is-open");
+        infoBox.classList.remove("is-open");
+        backdrop.classList.remove("is-open");
+      })
+
+      closeBtnOutlier.addEventListener('click', ()=> {
+        outlierPage.classList.remove('is-open');
+      })
+
+      function ViewOutliers(uniqueOutliers) {
+        outliersFound.textContent = uniqueOutliers.length + "/15";
+
+        for (let i = 0; i < uniqueOutliers.length; i++) {
+          outlierPageParas[i].textContent = you[i]
+        }
+      }
+
+
     </script>
   </body>
 </html>

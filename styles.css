@@ -307,7 +307,7 @@ div.custom-tooltip:hover span {
 }
 
 /* Close button */
-.close-btn {
+.close-btn, .close-outlier-page{
     position: absolute;
     top: 14px;
     right: 14px;
@@ -320,7 +320,7 @@ div.custom-tooltip:hover span {
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.close-btn:hover {
+.close-btn:hover, .close-outlier-page:hover {
     color: #fff;
     transform: rotate(90deg);
 }
@@ -437,8 +437,8 @@ div.custom-tooltip:hover span {
 }
 
 
-/* ============ Full Page Poem (Glassmorphism Style, Modal Style) ============ */
-.poem-page {
+/* ============ Full Page Poem and Outlier Page Ahhhh ============ */
+.poem-page, .outlier-page {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -469,7 +469,7 @@ div.custom-tooltip:hover span {
     visibility 0s linear 180ms;
 }
 
-.poem-page.is-open {
+.poem-page.is-open, .outlier-page.is-open{
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -511,7 +511,7 @@ div.custom-tooltip:hover span {
 }
 
 /* Close button */
-.close-poem-page {
+.close-poem-page{
   position: absolute;
   top: 8px;
   right: 8px;
@@ -528,7 +528,32 @@ div.custom-tooltip:hover span {
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.close-poem-page:hover {
+.close-poem-page:hover{
   color: #fff;
   transform: scale(1.1);
+}
+
+/* Extra outlier page styling */
+
+.outlier-page {
+  min-width: 450px;
+  min-height: 500px;
+  padding: 1.5rem;
+  font-family: Arial, sans-serif;
+}
+
+/* Title with prominent underline */
+.outlier-page h2 {
+  padding-bottom: 0.2rem;
+  border-bottom: 3px solid #ddd; /* thicker, more prominent */
+  font-size: 1.5rem;
+}
+
+/* Each line styled like a page entry */
+.outlier-page p {
+  margin: 0.5rem 0;
+  min-height: 1.3em; 
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  font-size: small;
 }
